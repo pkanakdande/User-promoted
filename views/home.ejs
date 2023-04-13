@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+    .null{
+        color: yellow;
+    }
+    .green{
+        color: green;
+    }
+    .red{
+        color:red
+    }
+</style>
+
+
+</head>
+<body>
+    <nav>
+        <h1>Assignment 4</h1>
+    </nav>
+ 
+    <div>
+        <%data.forEach((a,index)=>{ %>
+            <% let classname="null" %>
+            <% if(a.ispromoted==null) { %>
+                  <% classname="null" %>   
+          <%  } else if (a.ispromoted){%>
+            <% classname="green" %>
+          <% } else{ %>
+         <% classname="red" %>
+         <%  } %>
+
+   <div class=<%= classname %> >
+    <p><b>Name:</b><%=a.name%></p>
+    <p><b>Email:</b><%=a.email%></p>
+
+    <span> 
+        <form method="POST" action="/users/<%= data[index]._id %>?_method=PUT">
+        <button id="edit-<%= data[index].name %>" type="submit">Promoted/Demoted</button>
+        </form>
+    </span>
+    &nbsp;
+   <span> 
+    <form method="POST" action="/users/<%= data[index]._id %>?_method=DELETE">
+    <button id="delete-<%= data[index].name %>">Delete</button>
+    </form>  
+  </span>
+      <%  }) %>
+    </div>
+    <a href="/form">Add user</a>
+
+</body>
+</html>
